@@ -25,7 +25,7 @@ public class LightServer extends LightServiceImplBase{
 	    logger.info("Server started, listening on " + port);
 	    		    
 	    server.awaitTermination();
- }
+	}
 	
 	public void switchPower(PowerRequest request, StreamObserver<PowerResponse> responseObserver) {
         System.out.println("Receiving request...");
@@ -39,5 +39,37 @@ public class LightServer extends LightServiceImplBase{
         responseObserver.onNext(response);
         responseObserver.onCompleted();
 
-  }
+	}
+	@Override
+	public StreamObserver<BrightnessRequest> changeBrightness(final StreamObserver<BrightnessResponse> responseObserver) {
+		
+		
+		return new StreamObserver<BrightnessRequest>() {
+			
+			int brightness = 0;
+			
+			@Override
+			public void onNext(BrightnessRequest value) {
+				
+				System.out.println("receive -> " + value.getBrightness());
+				brightness = value.getBrightness();
+				
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onCompleted() {
+				BrightnessResponse response = BrightnessResponse.newBuilder().setBrightness(brightness).build();
+				responseObserver.onNext(response);
+				responseObserver.onCompleted();
+			}
+			
+			
+		};
+	}	
 }
