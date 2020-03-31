@@ -38,35 +38,15 @@ public class ThermostatServer extends ThermostatServiceImplBase{
         responseObserver.onCompleted();
 
 	}
-	@Override
-	public StreamObserver<TemperatureRequest> changeTemperature(final StreamObserver<TemperatureResponse> responseObserver) {
-		
-		return new StreamObserver<TemperatureRequest>() {
-			
-			int temp = 0;
-			
-			@Override
-			public void onNext(TemperatureRequest value) {
-				
-				System.out.println("receive -> " + value.getTemperature());
-				temp = value.getTemperature();
-				
-			}
-
-			@Override
-			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onCompleted() {
-				TemperatureResponse response = TemperatureResponse.newBuilder().setTemperature(temp).build();
-				responseObserver.onNext(response);
-				responseObserver.onCompleted();
-			}
-			
-			
-		};
+	
+	public void changeTemperature(TemperatureRequest request, StreamObserver<TemperatureResponse> responseObserver) {
+		 System.out.println("Thermo Temp");
+		 
+		 int temp = request.getTemperature();
+		 System.out.println(temp);		
+		 responseObserver.onNext(TemperatureResponse.newBuilder().setTemperature(temp).build());
+		 
+		 responseObserver.onCompleted();
 	}
+	
 }

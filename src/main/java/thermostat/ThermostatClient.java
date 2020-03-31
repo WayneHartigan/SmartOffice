@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-import light.BrightnessRequest;
-import light.BrightnessResponse;
 
 public class ThermostatClient {
 	private static  Logger logger = Logger.getLogger(ThermostatClient.class.getName());
@@ -37,44 +35,38 @@ public class ThermostatClient {
 
     }
 	
-	public static void changeTemperature(){
+	public static void changeTemperature() {
+		TemperatureRequest request = TemperatureRequest.newBuilder().setTemperature(15).build();
 
 		StreamObserver<TemperatureResponse> responseObserver = new StreamObserver<TemperatureResponse>() {
 
 			@Override
 			public void onNext(TemperatureResponse value) {
-				System.out.println("receiving brightness: " + value.getTemperature());
+				System.out.println("receiving " + value);
+
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
+				t.printStackTrace();
 
 			}
 
 			@Override
 			public void onCompleted() {
-				// TODO Auto-generated method stub
-
+				System.out.println("on completed ");
 			}
 
 		};
 
-		StreamObserver<TemperatureRequest> requestObserver = asyncStub.changeTemperature(responseObserver);
+		asyncStub.changeTemperature(request, responseObserver);
+
+
 		try {
-
-			requestObserver.onNext(TemperatureRequest.newBuilder().setTemperature(5).build());
-			requestObserver.onNext(TemperatureRequest.newBuilder().setTemperature(10).build());
-			requestObserver.onNext(TemperatureRequest.newBuilder().setTemperature(15).build());
-			requestObserver.onNext(TemperatureRequest.newBuilder().setTemperature(20).build());
-			requestObserver.onNext(TemperatureRequest.newBuilder().setTemperature(25).build());
-
-
-		} catch (RuntimeException e) {
-			System.out.println("Error");
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		// Mark the end of requests
-		requestObserver.onCompleted();
 	}
 }

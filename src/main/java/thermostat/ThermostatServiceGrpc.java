@@ -66,7 +66,7 @@ public final class ThermostatServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "changeTemperature",
       requestType = thermostat.TemperatureRequest.class,
       responseType = thermostat.TemperatureResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<thermostat.TemperatureRequest,
       thermostat.TemperatureResponse> getChangeTemperatureMethod() {
     io.grpc.MethodDescriptor<thermostat.TemperatureRequest, thermostat.TemperatureResponse> getChangeTemperatureMethod;
@@ -75,7 +75,7 @@ public final class ThermostatServiceGrpc {
         if ((getChangeTemperatureMethod = ThermostatServiceGrpc.getChangeTemperatureMethod) == null) {
           ThermostatServiceGrpc.getChangeTemperatureMethod = getChangeTemperatureMethod = 
               io.grpc.MethodDescriptor.<thermostat.TemperatureRequest, thermostat.TemperatureResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "thermostat.ThermostatService", "changeTemperature"))
               .setSampledToLocalTracing(true)
@@ -127,9 +127,9 @@ public final class ThermostatServiceGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<thermostat.TemperatureRequest> changeTemperature(
+    public void changeTemperature(thermostat.TemperatureRequest request,
         io.grpc.stub.StreamObserver<thermostat.TemperatureResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getChangeTemperatureMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getChangeTemperatureMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -143,7 +143,7 @@ public final class ThermostatServiceGrpc {
                   this, METHODID_SWITCH_POWER)))
           .addMethod(
             getChangeTemperatureMethod(),
-            asyncClientStreamingCall(
+            asyncServerStreamingCall(
               new MethodHandlers<
                 thermostat.TemperatureRequest,
                 thermostat.TemperatureResponse>(
@@ -180,10 +180,10 @@ public final class ThermostatServiceGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<thermostat.TemperatureRequest> changeTemperature(
+    public void changeTemperature(thermostat.TemperatureRequest request,
         io.grpc.stub.StreamObserver<thermostat.TemperatureResponse> responseObserver) {
-      return asyncClientStreamingCall(
-          getChannel().newCall(getChangeTemperatureMethod(), getCallOptions()), responseObserver);
+      asyncServerStreamingCall(
+          getChannel().newCall(getChangeTemperatureMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -210,6 +210,14 @@ public final class ThermostatServiceGrpc {
     public thermostat.PowerResponse switchPower(thermostat.PowerRequest request) {
       return blockingUnaryCall(
           getChannel(), getSwitchPowerMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<thermostat.TemperatureResponse> changeTemperature(
+        thermostat.TemperatureRequest request) {
+      return blockingServerStreamingCall(
+          getChannel(), getChangeTemperatureMethod(), getCallOptions(), request);
     }
   }
 
@@ -264,6 +272,10 @@ public final class ThermostatServiceGrpc {
           serviceImpl.switchPower((thermostat.PowerRequest) request,
               (io.grpc.stub.StreamObserver<thermostat.PowerResponse>) responseObserver);
           break;
+        case METHODID_CHANGE_TEMPERATURE:
+          serviceImpl.changeTemperature((thermostat.TemperatureRequest) request,
+              (io.grpc.stub.StreamObserver<thermostat.TemperatureResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -274,9 +286,6 @@ public final class ThermostatServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_CHANGE_TEMPERATURE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.changeTemperature(
-              (io.grpc.stub.StreamObserver<thermostat.TemperatureResponse>) responseObserver);
         default:
           throw new AssertionError();
       }

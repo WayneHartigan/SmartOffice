@@ -43,7 +43,6 @@ public class LightServer extends LightServiceImplBase{
 	@Override
 	public StreamObserver<BrightnessRequest> changeBrightness(final StreamObserver<BrightnessResponse> responseObserver) {
 		
-		
 		return new StreamObserver<BrightnessRequest>() {
 			
 			int brightness = 0;

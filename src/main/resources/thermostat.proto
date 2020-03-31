@@ -10,7 +10,7 @@ service ThermostatService {
 
     rpc switchPower(PowerRequest) returns (PowerResponse) {}
 
-    rpc changeTemperature(stream TemperatureRequest) returns (TemperatureResponse) {} 
+    rpc changeTemperature(TemperatureRequest) returns (stream TemperatureResponse) {} 
 
 }
 

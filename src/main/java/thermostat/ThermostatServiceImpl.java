@@ -52,7 +52,7 @@ public final class ThermostatServiceImpl {
       "quest\032\031.thermostat.PowerResponse\"\000\022X\n\021ch" +
       "angeTemperature\022\036.thermostat.Temperature" +
       "Request\032\037.thermostat.TemperatureResponse" +
-      "\"\000(\001B%\n\nthermostatB\025ThermostatServiceImp" +
+      "\"\0000\001B%\n\nthermostatB\025ThermostatServiceImp" +
       "lP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
