@@ -41,8 +41,6 @@ public class LightClient {
 			@Override
 			public void onNext(BrightnessResponse value) {
 				System.out.println("receiving brightness: " + value.getBrightness());
-
-
 			}
 
 			@Override
