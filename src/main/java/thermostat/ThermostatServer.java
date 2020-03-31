@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-import light.PowerRequest;
-import light.PowerResponse;
+import thermostat.PowerRequest;
+import thermostat.PowerResponse;
 import thermostat.ThermostatServiceGrpc.ThermostatServiceImplBase;
 
 public class ThermostatServer extends ThermostatServiceImplBase{
