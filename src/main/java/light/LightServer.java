@@ -28,11 +28,16 @@ public class LightServer extends LightServiceImplBase{
 	}
 	
 	public void switchPower(PowerRequest request, StreamObserver<PowerResponse> responseObserver) {
-        System.out.println("Receiving request...");
+        System.out.println("Receiving request for power!");
 
-        System.out.println("Light power");
-
-        Boolean power = request.getSwitch(); 
+        Boolean power = request.getSwitch();
+        if (power) {
+        	System.out.println("Setting power to on!");
+        }
+        else {
+        	System.out.println("Setting power to off!");
+        }
+        
         
         PowerResponse response = PowerResponse.newBuilder().setSwitch(power).build();
 
@@ -45,19 +50,18 @@ public class LightServer extends LightServiceImplBase{
 		
 		return new StreamObserver<BrightnessRequest>() {
 			
-			int brightness = 0;
+			int brightness;
 			
 			@Override
 			public void onNext(BrightnessRequest value) {
 				
-				System.out.println("receive -> " + value.getBrightness());
 				brightness = value.getBrightness();
+				System.out.println("Request to turn brightness to -> " + brightness);
 				
 			}
-
+			
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
 				
 			}
 

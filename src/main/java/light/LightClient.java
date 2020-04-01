@@ -30,31 +30,34 @@ public class LightClient {
 		PowerRequest request = PowerRequest.newBuilder().setSwitch(false).build();
 
 		PowerResponse response = blockingStub.switchPower(request);
-
-        System.out.println(response.getSwitch());
+		
+		if (response.getSwitch()) {
+			System.out.println("Light power has been turned on!");
+		}
+		else {
+			System.out.println("Light power has been turned off!");
+		}
 
     }
 	public static void changeBrightness(){
 
 		StreamObserver<BrightnessResponse> responseObserver = new StreamObserver<BrightnessResponse>() {
 
-			@Override
 			public void onNext(BrightnessResponse value) {
-				System.out.println("receiving brightness: " + value.getBrightness());
+				int brightness = value.getBrightness();
+				
+				System.out.println("Brightness has been set to level " + brightness);
 			}
 
-			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
+				t.printStackTrace();
 
 			}
 
-			@Override
 			public void onCompleted() {
-				// TODO Auto-generated method stub
+				System.out.println("Complete");
 
 			}
-
 		};
 
 		StreamObserver<BrightnessRequest> requestObserver = asyncStub.changeBrightness(responseObserver);
@@ -70,8 +73,6 @@ public class LightClient {
 		} catch (RuntimeException e) {
 			System.out.println("Error");
 		}
-
-		// Mark the end of requests
 		requestObserver.onCompleted();
 	}
 }

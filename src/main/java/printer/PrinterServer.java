@@ -48,6 +48,7 @@ public class PrinterServer extends PrinterServiceImplBase{
 	            StringBuilder statement = new StringBuilder(); 
 	  
 	            statement.append(request.getStatement());
+	            System.out.println(statement);
 	        
 	            PrintResponse reply = PrintResponse.newBuilder().setStatement(statement.toString()).build();
 	      
@@ -55,7 +56,7 @@ public class PrinterServer extends PrinterServiceImplBase{
 	          }
 
 	        public void onError(Throwable t) {
-	          //logger.log(Level.WARNING, "routeChat cancelled");
+	          System.out.println("Error, service stopped");
 	        }
 	        public void onCompleted() {
 	          responseObserver.onCompleted();

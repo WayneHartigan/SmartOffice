@@ -25,6 +25,7 @@ public class PrinterClient {
 		futureStub =  PrinterServiceGrpc.newFutureStub(channel);
 
 		switchPower();
+		printStatement();
 
 	}
 	
