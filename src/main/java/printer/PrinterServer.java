@@ -41,5 +41,26 @@ public class PrinterServer extends PrinterServiceImplBase{
         responseObserver.onCompleted();
 
 	}
+	
+	public StreamObserver<PrintRequest> printStatement(final StreamObserver<PrintResponse> responseObserver) {
+	      return new StreamObserver<PrintRequest>() {
+	        public void onNext(PrintRequest request) {
+	            StringBuilder statement = new StringBuilder(); 
+	  
+	            statement.append(request.getStatement());
+	        
+	            PrintResponse reply = PrintResponse.newBuilder().setStatement(statement.toString()).build();
+	      
+	            responseObserver.onNext(reply);
+	          }
+
+	        public void onError(Throwable t) {
+	          //logger.log(Level.WARNING, "routeChat cancelled");
+	        }
+	        public void onCompleted() {
+	          responseObserver.onCompleted();
+	        }
+	      };
+	    }
 
 }

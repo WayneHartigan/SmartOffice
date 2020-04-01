@@ -4,6 +4,9 @@ import java.util.logging.Logger;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
+import light.BrightnessRequest;
+import light.BrightnessResponse;
 import printer.PrinterClient;
 
 public class PrinterClient {
@@ -34,5 +37,46 @@ public class PrinterClient {
         System.out.println(response.getSwitch());
 
     }
+	
+	public static void printStatement(){
+
+		StreamObserver<PrintResponse> responseObserver = new StreamObserver<PrintResponse>() {
+
+			@Override
+			public void onNext(PrintResponse value) {
+				System.out.println("receiving brightness: " + value.getStatement());
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onCompleted() {
+				// TODO Auto-generated method stub
+
+			}
+
+		};
+
+		StreamObserver<PrintRequest> requestObserver = asyncStub.printStatement(responseObserver);
+		try {
+
+			requestObserver.onNext(PrintRequest.newBuilder().setStatement("Hello").build());
+			requestObserver.onNext(PrintRequest.newBuilder().setStatement("Please").build());
+			requestObserver.onNext(PrintRequest.newBuilder().setStatement("Print").build());
+			requestObserver.onNext(PrintRequest.newBuilder().setStatement("This").build());
+			requestObserver.onNext(PrintRequest.newBuilder().setStatement("Out").build());
+
+
+		} catch (RuntimeException e) {
+			System.out.println("Error");
+		}
+
+		// Mark the end of requests
+		requestObserver.onCompleted();
+	}
 
 }
