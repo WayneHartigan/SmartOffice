@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "projector";
+option java_outer_classname = "ProjectorServiceImpl";
+
+package projector;
+
+service ProjectorService {
+
+    rpc switchPower(PowerRequest) returns (PowerResponse) {}
+
+    rpc changeInput(InputRequest) returns (InputResponse) {}
+
+}
+
+message PowerRequest {
+    bool switch = 1;
+}
+
+message PowerResponse {
+    bool switch = 1;
+}
+
+message InputRequest {
+    string input = 1;
+}
+
+message InputResponse {
+    string input = 1;
+}
