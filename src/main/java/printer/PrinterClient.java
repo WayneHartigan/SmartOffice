@@ -1,5 +1,6 @@
 package printer;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 import io.grpc.ManagedChannel;
@@ -45,18 +46,16 @@ public class PrinterClient {
 
 			@Override
 			public void onNext(PrintResponse value) {
-				System.out.println("receiving brightness: " + value.getStatement());
+				System.out.println("receiving statement to print -> " + value.getStatement());
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onCompleted() {
-				// TODO Auto-generated method stub
 
 			}
 
@@ -70,14 +69,17 @@ public class PrinterClient {
 			requestObserver.onNext(PrintRequest.newBuilder().setStatement("Print").build());
 			requestObserver.onNext(PrintRequest.newBuilder().setStatement("This").build());
 			requestObserver.onNext(PrintRequest.newBuilder().setStatement("Out").build());
-
+			
+			Thread.sleep(new Random().nextInt(1000) + 500);
 
 		} catch (RuntimeException e) {
-			System.out.println("Error");
-		}
+            requestObserver.onError(e);
+            throw e;
+            } catch (InterruptedException e) {
 
-		// Mark the end of requests
+                e.printStackTrace();
+        }
+
 		requestObserver.onCompleted();
 	}
-
 }

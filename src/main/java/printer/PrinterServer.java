@@ -43,25 +43,24 @@ public class PrinterServer extends PrinterServiceImplBase{
 	}
 	
 	public StreamObserver<PrintRequest> printStatement(final StreamObserver<PrintResponse> responseObserver) {
-	      return new StreamObserver<PrintRequest>() {
-	        public void onNext(PrintRequest request) {
-	            StringBuilder statement = new StringBuilder(); 
-	  
-	            statement.append(request.getStatement());
-	            System.out.println(statement);
-	        
-	            PrintResponse reply = PrintResponse.newBuilder().setStatement(statement.toString()).build();
-	      
-	            responseObserver.onNext(reply);
-	          }
+      return new StreamObserver<PrintRequest>() {
+        public void onNext(PrintRequest request) {
+            StringBuilder statement = new StringBuilder(); 
+  
+            statement.append(request.getStatement());
+            System.out.println(statement);
+        
+            PrintResponse reply = PrintResponse.newBuilder().setStatement(statement.toString()).build();
+      
+            responseObserver.onNext(reply);
+          }
 
-	        public void onError(Throwable t) {
-	          System.out.println("Error, service stopped");
-	        }
-	        public void onCompleted() {
-	          responseObserver.onCompleted();
-	        }
-	      };
-	    }
-
+        public void onError(Throwable t) {
+          System.out.println("Error, service stopped");
+        }
+        public void onCompleted() {
+          responseObserver.onCompleted();
+        }
+      };
+    }
 }
