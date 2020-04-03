@@ -15,6 +15,7 @@ public class ProjectorClient {
 		asyncStub = ProjectorServiceGrpc.newStub(channel);
 
 		switchPower();
+		changeInput();
 
 	}
 	
@@ -25,12 +26,19 @@ public class ProjectorClient {
 		PowerResponse response = blockingStub.switchPower(request);
 		
 		if (response.getSwitch()) {
-			System.out.println("Light power has been turned on!");
+			System.out.println("Projector power has been turned on!");
 		}
 		else {
-			System.out.println("Light power has been turned off!");
+			System.out.println("Projector power has been turned off!");
 		}
 
     }
+	
+	public static void changeInput() {
+		InputRequest request = InputRequest.newBuilder().setInput("HDMI").build();
+		InputResponse response = blockingStub.changeInput(request);
+		
+		System.out.println("Input changed to " + response.getInput());
+	}
 
 }
