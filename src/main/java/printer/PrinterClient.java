@@ -1,29 +1,23 @@
 package printer;
 
 import java.util.Random;
-import java.util.logging.Logger;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-import light.BrightnessRequest;
-import light.BrightnessResponse;
 import printer.PrinterClient;
 
 public class PrinterClient {
 	
-	private static  Logger logger = Logger.getLogger(PrinterClient.class.getName());
 	
 	private static PrinterServiceGrpc.PrinterServiceBlockingStub blockingStub;
 	private static PrinterServiceGrpc.PrinterServiceStub asyncStub;
-	private static PrinterServiceGrpc.PrinterServiceFutureStub futureStub;
 	
 	public static void main(String[] args) throws Exception {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 
 		blockingStub = PrinterServiceGrpc.newBlockingStub(channel);
 		asyncStub = PrinterServiceGrpc.newStub(channel);
-		futureStub =  PrinterServiceGrpc.newFutureStub(channel);
 
 		switchPower();
 		printStatement();

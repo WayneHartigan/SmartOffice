@@ -6,13 +6,11 @@ import io.grpc.ManagedChannelBuilder;
 public class ProjectorClient {
 	
 	private static ProjectorServiceGrpc.ProjectorServiceBlockingStub blockingStub;
-	private static ProjectorServiceGrpc.ProjectorServiceStub asyncStub;
 
 	public static void main(String[] args) throws Exception {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 
 		blockingStub = ProjectorServiceGrpc.newBlockingStub(channel);
-		asyncStub = ProjectorServiceGrpc.newStub(channel);
 
 		switchPower();
 		changeInput();
