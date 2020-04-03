@@ -26,11 +26,15 @@ public class ThermostatServer extends ThermostatServiceImplBase{
 	}
 	
 	public void switchPower(PowerRequest request, StreamObserver<PowerResponse> responseObserver) {
-        System.out.println("Receiving request...");
+        System.out.println("Receiving request for power!");
 
-        System.out.println("Thermostat power");
-
-        Boolean power = request.getSwitch(); 
+        Boolean power = request.getSwitch();
+        if (power) {
+        	System.out.println("Setting power to on!");
+        }
+        else {
+        	System.out.println("Setting power to off!");
+        }
         
         PowerResponse response = PowerResponse.newBuilder().setSwitch(power).build();
 
@@ -39,11 +43,10 @@ public class ThermostatServer extends ThermostatServiceImplBase{
 
 	}
 	
-	public void changeTemperature(TemperatureRequest request, StreamObserver<TemperatureResponse> responseObserver) {
-		 System.out.println("Thermo Temp");
-		 
+	public void changeTemperature(TemperatureRequest request, StreamObserver<TemperatureResponse> responseObserver) {		 
 		 int temp = request.getTemperature();
-		 System.out.println(temp);		
+		 System.out.println("Request to change temperature to -> " + temp + " degrees celcius");
+		 System.out.println("Temperature set!");
 		 responseObserver.onNext(TemperatureResponse.newBuilder().setTemperature(temp).build());
 		 
 		 responseObserver.onCompleted();

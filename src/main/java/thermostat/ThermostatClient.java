@@ -31,18 +31,24 @@ public class ThermostatClient {
 
 		PowerResponse response = blockingStub.switchPower(request);
 
-        System.out.println(response.getSwitch());
+		if (response.getSwitch()) {
+			System.out.println("Thermostat power has been turned on!");
+		}
+		else {
+			System.out.println("Thermostat power has been turned off!");
+		}
 
     }
 	
 	public static void changeTemperature() {
 		TemperatureRequest request = TemperatureRequest.newBuilder().setTemperature(15).build();
+		System.out.println("Requesting to set temperature to -> " + request + " degrees celcius");
 
 		StreamObserver<TemperatureResponse> responseObserver = new StreamObserver<TemperatureResponse>() {
 
 			@Override
 			public void onNext(TemperatureResponse value) {
-				System.out.println("receiving " + value);
+				System.out.println("Temperature has been changed to -> " + value + " degrees celcius");
 
 			}
 
