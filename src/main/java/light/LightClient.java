@@ -1,25 +1,21 @@
 package light;
 
 import java.util.Random;
-import java.util.logging.Logger;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class LightClient {
-	private static  Logger logger = Logger.getLogger(LightClient.class.getName());
 
 	private static LightServiceGrpc.LightServiceBlockingStub blockingStub;
 	private static LightServiceGrpc.LightServiceStub asyncStub;
-	private static LightServiceGrpc.LightServiceFutureStub futureStub;
 
 	public static void main(String[] args) throws Exception {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 
 		blockingStub = LightServiceGrpc.newBlockingStub(channel);
 		asyncStub = LightServiceGrpc.newStub(channel);
-		futureStub =  LightServiceGrpc.newFutureStub(channel);
 
 		switchPower();
 		changeBrightness();
