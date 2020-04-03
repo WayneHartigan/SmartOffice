@@ -14,7 +14,7 @@ public class PrinterClient {
 	private static PrinterServiceGrpc.PrinterServiceStub asyncStub;
 	
 	public static void main(String[] args) throws Exception {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50053).usePlaintext().build();
 
 		blockingStub = PrinterServiceGrpc.newBlockingStub(channel);
 		asyncStub = PrinterServiceGrpc.newStub(channel);

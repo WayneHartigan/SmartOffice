@@ -8,7 +8,7 @@ public class ProjectorClient {
 	private static ProjectorServiceGrpc.ProjectorServiceBlockingStub blockingStub;
 
 	public static void main(String[] args) throws Exception {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50054).usePlaintext().build();
 
 		blockingStub = ProjectorServiceGrpc.newBlockingStub(channel);
 

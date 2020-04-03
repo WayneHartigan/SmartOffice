@@ -10,7 +10,7 @@ public class ThermostatClient {
 	private static ThermostatServiceGrpc.ThermostatServiceStub asyncStub;
 
 	public static void main(String[] args) throws Exception {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052).usePlaintext().build();
 
 		blockingStub = ThermostatServiceGrpc.newBlockingStub(channel);
 		asyncStub = ThermostatServiceGrpc.newStub(channel);

@@ -17,7 +17,7 @@ public class PrinterServer extends PrinterServiceImplBase{
 	public static void main(String[] args) throws IOException, InterruptedException {
 		PrinterServer printerserver = new PrinterServer();
 	   
-		int port = 50051;
+		int port = 50053;
 	    Server server = ServerBuilder.forPort(port)
 	        .addService(printerserver)
 	        .build()

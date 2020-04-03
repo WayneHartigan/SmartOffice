@@ -14,7 +14,7 @@ public class ThermostatServer extends ThermostatServiceImplBase{
 	public static void main(String[] args) throws IOException, InterruptedException {
 		ThermostatServer thermostatserver = new ThermostatServer();
 	   
-	    int port = 50051;
+	    int port = 50052;
 	    Server server = ServerBuilder.forPort(port)
 	        .addService(thermostatserver)
 	        .build()
