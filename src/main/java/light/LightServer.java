@@ -49,7 +49,7 @@ public class LightServer extends LightServiceImplBase{
 		
 		return new StreamObserver<BrightnessRequest>() {
 			
-			int brightness;
+			int brightness = 0;
 			
 			public void onNext(BrightnessRequest value) {
 				
@@ -59,7 +59,7 @@ public class LightServer extends LightServiceImplBase{
 			}
 			
 			public void onError(Throwable t) {
-				
+				t.printStackTrace();
 			}
 
 			public void onCompleted() {
@@ -67,8 +67,6 @@ public class LightServer extends LightServiceImplBase{
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			}
-			
-			
 		};
-	}	
+	}
 }

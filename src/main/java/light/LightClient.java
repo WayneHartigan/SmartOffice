@@ -44,19 +44,18 @@ public class LightClient {
 
 		StreamObserver<BrightnessResponse> responseObserver = new StreamObserver<BrightnessResponse>() {
 
-			public void onNext(BrightnessResponse value) {
-				int brightness = value.getBrightness();
-				
-				System.out.println("Brightness has been set to level " + brightness);
+			@Override
+			public void onNext(BrightnessResponse value) {				
+				System.out.println("Brightness has been set to level " + value.getBrightness());
 			}
 
+			@Override
 			public void onError(Throwable t) {
-				t.printStackTrace();
 
 			}
 
+			@Override
 			public void onCompleted() {
-				System.out.println("Complete");
 
 			}
 		};
@@ -65,20 +64,25 @@ public class LightClient {
 		try {
 
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(1).build());
+			System.out.println("Sent");
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(2).build());
+			System.out.println("Sent");
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(3).build());
+			System.out.println("Sent");
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(4).build());
+			System.out.println("Sent");
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(5).build());
+			System.out.println("Sent");
 			
 			Thread.sleep(new Random().nextInt(1000) + 500);
 
 		} catch (RuntimeException e) {
-			System.out.println("Error");
-			requestObserver.onError(e);
+            requestObserver.onError(e);
             throw e;
-		} catch (InterruptedException e) {
-            e.printStackTrace();
-		}
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+        }
 		requestObserver.onCompleted();
 	}
 }
