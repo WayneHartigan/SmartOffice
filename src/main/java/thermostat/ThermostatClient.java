@@ -31,12 +31,7 @@ public class ThermostatClient {
 
 		PowerResponse response = blockingStub.switchPower(request);
 
-		if (response.getSwitch()) {
-			System.out.println("Central heating has been turned on!");
-		}
-		else {
-			System.out.println("Central heating has been turned off!");
-		}
+        System.out.println(response.getSwitch());
 
     }
 	

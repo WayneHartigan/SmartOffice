@@ -10,7 +10,7 @@ service ProjectorService {
 
     rpc switchPower(PowerRequest) returns (PowerResponse) {}
 
-    rpc changeInput(InputRequest) returns (InputResponse) {}
+    rpc changeInput(InputRequest) returns (InputResponse) {} 
 
 }
 
