@@ -45,14 +45,12 @@ public class LightServer extends LightServiceImplBase{
         responseObserver.onCompleted();
 
 	}
-	@Override
 	public StreamObserver<BrightnessRequest> changeBrightness(final StreamObserver<BrightnessResponse> responseObserver) {
 		
 		return new StreamObserver<BrightnessRequest>() {
 			
 			int brightness;
 			
-			@Override
 			public void onNext(BrightnessRequest value) {
 				
 				brightness = value.getBrightness();
@@ -60,12 +58,10 @@ public class LightServer extends LightServiceImplBase{
 				
 			}
 			
-			@Override
 			public void onError(Throwable t) {
 				
 			}
 
-			@Override
 			public void onCompleted() {
 				BrightnessResponse response = BrightnessResponse.newBuilder().setBrightness(brightness).build();
 				responseObserver.onNext(response);

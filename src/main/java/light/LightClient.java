@@ -1,5 +1,6 @@
 package light;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 import io.grpc.ManagedChannel;
@@ -68,10 +69,15 @@ public class LightClient {
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(3).build());
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(4).build());
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(5).build());
-
+			
+			Thread.sleep(new Random().nextInt(1000) + 500);
 
 		} catch (RuntimeException e) {
 			System.out.println("Error");
+			requestObserver.onError(e);
+            throw e;
+		} catch (InterruptedException e) {
+            e.printStackTrace();
 		}
 		requestObserver.onCompleted();
 	}
