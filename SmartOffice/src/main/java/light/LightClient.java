@@ -23,11 +23,13 @@ public class LightClient {
 	}
 	
 	public static void switchPower() {
-
+		// send the request
 		PowerRequest request = PowerRequest.newBuilder().setSwitch(false).build();
-
+		
+		// check the response
 		PowerResponse response = blockingStub.switchPower(request);
 		
+		// print appropriate message depending on response
 		if (response.getSwitch()) {
 			System.out.println("Light power has been turned on!");
 		}
@@ -41,7 +43,8 @@ public class LightClient {
 		StreamObserver<BrightnessResponse> responseObserver = new StreamObserver<BrightnessResponse>() {
 
 			@Override
-			public void onNext(BrightnessResponse value) {				
+			public void onNext(BrightnessResponse value) {
+				// Print out response
 				System.out.println("Brightness has been set to level " + value.getBrightness());
 			}
 
@@ -58,7 +61,7 @@ public class LightClient {
 
 		StreamObserver<BrightnessRequest> requestObserver = asyncStub.changeBrightness(responseObserver);
 		try {
-
+			// send a stream of requests
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(1).build());
 			System.out.println("Sent");
 			requestObserver.onNext(BrightnessRequest.newBuilder().setBrightness(2).build());
@@ -71,7 +74,7 @@ public class LightClient {
 			System.out.println("Sent");
 			
 			Thread.sleep(new Random().nextInt(1000) + 500);
-
+			// catch any errors
 		} catch (RuntimeException e) {
             requestObserver.onError(e);
             throw e;
