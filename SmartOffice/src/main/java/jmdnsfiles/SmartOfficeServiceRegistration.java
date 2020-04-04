@@ -15,7 +15,7 @@ public class SmartOfficeServiceRegistration {
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
             // Register a service
-            ServiceInfo light = ServiceInfo.create("_http._tcp.local.", "light", 50051, "Control the lights");
+            ServiceInfo light = ServiceInfo.create("_http._tcp.local.", "light", 50055, "Control the lights");
             jmdns.registerService(light);
             ServiceInfo thermostat = ServiceInfo.create("_http._tcp.local.", "thermostat", 50052, "Control the thermostat");
             jmdns.registerService(thermostat);
