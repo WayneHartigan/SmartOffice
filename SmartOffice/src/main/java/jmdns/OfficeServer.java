@@ -13,13 +13,17 @@ import javax.jmdns.ServiceInfo;
 public class OfficeServer {
 	
 	public static void main(String[] args) throws IOException {
-        int port = 9090;
         JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
         // Register a service
-        ServiceInfo serviceInfo = ServiceInfo.create("_date._tcp.local.", "date", port, "Date Server will give you the current date");
-        jmdns.registerService(serviceInfo);
-        System.out.println("Starting the Date Server loop ");
+        ServiceInfo light = ServiceInfo.create("_light._tcp.local.", "light", 50051, "Control the lights");
+        jmdns.registerService(light);
+        ServiceInfo thermometer = ServiceInfo.create("_thermometer._tcp.local.", "thermometer", 50052, "Control the thermometer");
+        jmdns.registerService(thermometer);
+        ServiceInfo printer = ServiceInfo.create("_printer._tcp.local.", "thermometer", 50053, "Control the printer");
+        jmdns.registerService(printer);
+        ServiceInfo projector = ServiceInfo.create("_projector._tcp.local.", "projector", 50054, "Control the projector");
+        jmdns.registerService(projector);
 
        
         ServerSocket listener = new ServerSocket(9090);
