@@ -23,16 +23,14 @@ public class SmartOfficeServiceRegistration {
             jmdns.registerService(printer);
             ServiceInfo projector = ServiceInfo.create("_http._tcp.local.", "projector", 50054, "Control the projector");
             jmdns.registerService(projector);
-
+            
             // Wait a bit
             Thread.sleep(25000);
 
-            // Unregister all services
             jmdns.unregisterAllServices();
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-
 }
