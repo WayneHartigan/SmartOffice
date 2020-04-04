@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message Input {
+    string input = 1;
+}
+
+service Projector {
+
+    rpc ChangeInput(Input) returns (Input) {}
+
+}
