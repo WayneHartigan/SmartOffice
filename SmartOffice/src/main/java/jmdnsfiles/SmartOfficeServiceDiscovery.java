@@ -10,7 +10,7 @@ import javax.jmdns.ServiceListener;
 
 public class SmartOfficeServiceDiscovery {
 	
-	private static class SampleListener implements ServiceListener {
+	private static class OfficeListener implements ServiceListener {
         @Override
         public void serviceAdded(ServiceEvent event) {
             System.out.println("Service added: " + event.getInfo());
@@ -33,7 +33,7 @@ public class SmartOfficeServiceDiscovery {
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
             // Add a service listener
-            jmdns.addServiceListener("_http._tcp.local.", new SampleListener());
+            jmdns.addServiceListener("_http._tcp.local.", new OfficeListener());
 
             // Wait a bit
             Thread.sleep(30000);

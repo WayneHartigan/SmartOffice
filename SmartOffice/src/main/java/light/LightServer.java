@@ -16,7 +16,7 @@ public class LightServer extends LightServiceImplBase{
 	public static void main(String[] args) throws IOException, InterruptedException {
 		LightServer lightserver = new LightServer();
 	   
-	    int port = 50051;
+	    int port = 50055;
 	    Server server = ServerBuilder.forPort(port)
 	        .addService(lightserver)
 	        .build()

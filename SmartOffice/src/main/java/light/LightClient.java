@@ -12,7 +12,7 @@ public class LightClient {
 	private static LightServiceGrpc.LightServiceStub asyncStub;
 
 	public static void main(String[] args) throws Exception {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50055).usePlaintext().build();
 
 		blockingStub = LightServiceGrpc.newBlockingStub(channel);
 		asyncStub = LightServiceGrpc.newStub(channel);
