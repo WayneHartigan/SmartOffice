@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "thermostat";
+option java_outer_classname = "ThermostatServiceImpl";
+
+package thermostat;
+
+service ThermostatService {
+
+    rpc switchPower(PowerRequest) returns (PowerResponse) {}
+
+    rpc changeTemperature(TemperatureRequest) returns (stream TemperatureResponse) {} 
+
+}
+
+message PowerRequest {
+    bool switch = 1;
+}
+
+message PowerResponse {
+    bool switch = 1;
+}
+
+message TemperatureRequest {
+    int32 temperature = 1;
+}
+
+message TemperatureResponse {
+    int32 temperature = 1;
+}

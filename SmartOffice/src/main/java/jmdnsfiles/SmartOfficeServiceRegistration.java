@@ -15,13 +15,13 @@ public class SmartOfficeServiceRegistration {
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
             // Register a service
-            ServiceInfo light = ServiceInfo.create("_http._tcp.local.", "light", 50051, "path=index.html");
+            ServiceInfo light = ServiceInfo.create("_http._tcp.local.", "light", 50051, "Control the lights");
             jmdns.registerService(light);
-            ServiceInfo thermostat = ServiceInfo.create("_http._tcp.local.", "thermostat", 50052, "path=index.html");
+            ServiceInfo thermostat = ServiceInfo.create("_http._tcp.local.", "thermostat", 50052, "Control the thermostat");
             jmdns.registerService(thermostat);
-            ServiceInfo printer = ServiceInfo.create("_http._tcp.local.", "printer", 50053, "path=index.html");
+            ServiceInfo printer = ServiceInfo.create("_http._tcp.local.", "printer", 50053, "Control the printer");
             jmdns.registerService(printer);
-            ServiceInfo projector = ServiceInfo.create("_http._tcp.local.", "projector", 50054, "path=index.html");
+            ServiceInfo projector = ServiceInfo.create("_http._tcp.local.", "projector", 50054, "Control the projector");
             jmdns.registerService(projector);
 
             // Wait a bit
